@@ -1,0 +1,8 @@
+.qodo
+.vscode/
+.idea/
+*.iml
+
+# Docker
+docker-compose.override.yml
+.dockerignore
