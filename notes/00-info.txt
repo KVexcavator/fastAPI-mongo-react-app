@@ -1,0 +1,64 @@
+https://github.com/PacktPublishing/Full-Stack-FastAPI-React-and-MongoDB-2nd-Edition
+check my  os:
+lsb_release -a
+No LSB modules are available.
+Distributor ID:	Ubuntu
+Description:	Ubuntu 22.04.5 LTS
+Release:	22.04
+Codename:	jammy
+-------------------------------------------------------
+mongo :
+Из компосы   FastAPI может подключаться к mongo, 
+используя mongodb://root:example@mongo:27017/.
+ ```
+ from motor.motor_asyncio import AsyncIOMotorClient
+
+MONGO_URI = "mongodb://root:example@mongo:27017"
+client = AsyncIOMotorClient(MONGO_URI)
+db = client["mydatabase"]  # Используем базу "mydatabase"
+````
+!!!! Если бы моного была установлена локально, было бы так
+-  MONGO_URI = "mongodb://localhost:27017"  
+-----------------------------------------------------------
+Создать виртуальную среду в своём домашнем каталоге
+python3.12 -m venv ~/beach
+для активации в терминале
+source ~/beach/bin/activate
+shell prompt  должна выглядуть при включении так
+(beach) zenx@pc:~ zenx$
+-----------------------------------------------------------
+pip install -r requirements.txt
+requirements.txt
+mypy==1.10.0
+mypy-extensions==1.0.0
+pydantic==2.7.4
+pydantic_core==2.18.4
+pydantic_settings==2.2.1
+----------------------------------------------------------
+HTTPie
+pip install httpie
+(venv) http GET "http://jsonplaceholder.typicode.com/todos/1"
+----------------------------------------------------------
+pip install fastapi uvicorn 
+unicorn один из трёх возможных серверов
+---------------------------------------------------------
+test_beach.py
+from fastapi import FastAPI
+
+app = FastAPI()
+
+
+@app.get("/")
+async def root():
+    return {"message": "Hello FastAPI"}
+
+
+@app.post("/")
+async def post_root():
+    return {"message": "Post request success!"}
+---------------------------------------------------------
+uvicorn test_beach:app --reload
+http://127.0.0.1:8000
+http://127.0.0.1:8000/docs
+
+
