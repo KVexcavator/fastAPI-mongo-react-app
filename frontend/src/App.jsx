@@ -1,12 +1,28 @@
-import { } from 'react'
+import { useState } from 'react';
+import { AuthProvider } from "./AuthContext";
+import Register from './Register';
+import Login from './Login';
+import Users from './Users';
+import Message from './Message';
 
 function App() {
-
+  const [showLogin, setShowLogin] = useState(true)
   return (
-    <div className="bg-purple-800 text-white min-h-screen p-4 flex flex-col justify-center items-center">
-      <h1 className="text-3xl font-thin">
-        Hello FARM stack!
-      </h1>
+    <div className="bg-blue-200 flex flex-col justify-center items-center min-h-screen">
+      <AuthProvider>
+        <h1 className="text-2xl text-blue-800">
+          Simple Auth App
+        </h1>
+        <Message />
+        {showLogin ? <Login /> : <Register />}
+        <button
+          onClick={() => setShowLogin(!showLogin)}
+        >
+          {showLogin ? "Register" : "Login"}
+        </button>
+        <hr />
+        <Users />
+      </AuthProvider>
     </div>
   )
 }

@@ -36,6 +36,16 @@ async def login(request: Request, loginUser: UserIn = Body(...)) -> str:
   response = JSONResponse(content={"token": token})
   return response
 
+@router.get("/me", response_description="Logged in user data", response_model=UserOut)
+async def me(request: Request, user_data=Depends(auth_handler.auth_wrapper)):
+    users = json.loads(open("users.json").read())["users"]
+
+    currentUser = next(
+        (user for user in users if user["username"] == user_data["username"]), None
+    )
+
+    return currentUser
+
 # protected route
 @router.get("/list", response_description="List all users")
 async def list_users(request: Request, user_data=Depends(auth_handler.auth_wrapper)):

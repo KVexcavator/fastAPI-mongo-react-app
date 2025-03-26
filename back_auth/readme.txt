@@ -2,6 +2,9 @@ https://fastapi.tiangolo.com/reference/security/#fastapi.security.HTTPBearer--ex
 cd back_auth/
 source ~/beach/bin/activate
 pip install fastapi uvicorn bcrypt==4.0.1 passlib pyjwt
+uvicorn app:app --reload
+http://127.0.0.1:8000
+http://127.0.0.1:8000/docs
 
 http 127.0.0.1:8000/users/register username="ivan" password="ivan123"
 http POST 127.0.0.1:8000/users/login username="ivan" password="ivan123"
