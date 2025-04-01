@@ -1,4 +1,10 @@
 fastapi
 motor
 uvicorn
+httpie
+cloudinary
 pydantic-settings
+python-multipart
+passlib
+pyjwt
+bcrypt
