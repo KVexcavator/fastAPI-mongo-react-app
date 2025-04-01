@@ -1,0 +1,39 @@
+__pycache__/
+.env
+venv/
+*.py[cod]
+*.so
+*.pyd
+*.sqlite3
+*.db
+uploads/*
+
+logs/
+*.log
+*.out
+
+# Pytest / Coverage
+.cache/
+.tox/
+.coverage
+coverage.xml
+htmlcov/
+
+# Mypy
+.mypy_cache/
+
+# Pydantic cache
+.pydantic/
+
+# Jupyter Notebooks
+.ipynb_checkpoints/
+
+# Poetry
+poetry.lock
+
+# Pipenv
+Pipfile
+Pipfile.lock
+
+# FastAPI-specific
+instance/

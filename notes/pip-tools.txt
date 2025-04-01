@@ -1,0 +1,50 @@
+pip-tools - это инструмент для управления зависимостями в Python 
+Он помогает фиксировать версии библиотек и обновлять их правильно. Включает две основные команды:  
+
+1. pip-compile 
+   - Создает зафиксированный requirements.txt из файла requirements.in
+   - Гарантирует, что зависимости не обновятся неожиданно.
+
+2. pip-sync 
+   - Обновляет установленное окружение так, чтобы оно соответствовало requirements.txt (удаляет ненужные пакеты).  
+
+
+Как использовать `pip-tools`  
+Устанавливаем:
+```sh
+pip install pip-tools
+```
+Создаем файл requirements.in с нефиксированными версиями:
+```txt
+fastapi
+uvicorn
+pydantic-settings
+```
+Компилируем зависимости в requirements.txt:
+```sh
+pip-compile
+```
+Теперь requirements.txt будет выглядеть так:
+```txt
+fastapi==0.111.0
+pydantic==2.7.0
+pydantic-settings==2.2.1
+starlette==0.37.2
+typing-extensions==4.11.0
+uvicorn==0.29.0
+```
+Устанавливаем зафиксированные зависимости:
+```sh
+pip-sync
+```
+
+pip-tools
+
+Позволяет легко обновлять зависимости:  
+```sh
+pip-compile --upgrade
+```
+Поддерживает файлы для dev-зависимостей:  
+```sh
+pip-compile requirements-dev.in
+```
