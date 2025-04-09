@@ -22,10 +22,14 @@ db = client["mydatabase"]  # Используем базу "mydatabase"
 -----------------------------------------------------------
 Создать виртуальную среду в своём домашнем каталоге
 python3.12 -m venv ~/beach
+чтобы установить определенную версию Python
+virtualenv beach --python=python3.9
 для активации в терминале
 source ~/beach/bin/activate
 shell prompt  должна выглядуть при включении так
 (beach) zenx@pc:~ zenx$
+проверить
+which python
 -----------------------------------------------------------
 pip install -r requirements.txt
 requirements.txt

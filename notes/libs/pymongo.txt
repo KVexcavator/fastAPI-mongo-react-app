@@ -1,0 +1,47 @@
+pymongo — это официальная библиотека Python для работы с MongoDB. Она позволяет подключаться, записывать, читать и обновлять данные в MongoDB.
+
+Как установить
+```bash
+pip install pymongo
+```
+Пример простого подключения к MongoDB:
+
+```python
+from pymongo import MongoClient
+
+# Подключение к локальной MongoDB
+client = MongoClient("mongodb://localhost:27017/")
+
+# Создаем/подключаемся к базе данных
+db = client["mydatabase"]
+
+# Создаем/подключаемся к коллекции
+collection = db["users"]
+
+# Добавляем данные
+user = {"name": "Alice", "age": 25}
+collection.insert_one(user)
+
+# Читаем данные
+for doc in collection.find():
+    print(doc)
+```
+
+CRUD Операции в pymongo
+Добавление документа
+```python
+collection.insert_one({"name": "Bob", "age": 30})
+```
+Чтение данных
+```python
+user = collection.find_one({"name": "Bob"})
+print(user)
+```
+Обновление документа
+```python
+collection.update_one({"name": "Bob"}, {"$set": {"age": 35}})
+```
+Удаление документа
+```python
+collection.delete_one({"name": "Bob"})
+```

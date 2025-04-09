@@ -1,7 +1,6 @@
 Лучший способ структурировать FastAPI-проект — разнести маршруты (роуты) и бизнес-логику по отдельным модулям. Разделение на модули улучшает читаемость, масштабируемость и тестируемость кода.  
 
-## **Структура проекта**  
-Вот рекомендуемая структура:  
+Структура проекта :  
 ```
 fastapi_project/
 │── app/
@@ -31,10 +30,9 @@ fastapi_project/
 │── .env
 ```
 
-## **1. Разносим маршруты по файлам**  
-В директории `app/api/v1/` создаем отдельные файлы для разных сущностей:  
-
-### **users.py**  
+1. Разносим маршруты по файлам 
+В директории app/api/v1/ создаем отдельные файлы для разных сущностей:  
+users.py 
 ```python
 from fastapi import APIRouter, Depends
 from app.services.user_service import UserService
@@ -46,8 +44,7 @@ router = APIRouter(prefix="/users", tags=["Users"])
 def create_user(user: UserCreate, service: UserService = Depends()):
     return service.create_user(user)
 ```
-
-### **posts.py**  
+posts.py 
 ```python
 from fastapi import APIRouter, Depends
 from app.services.post_service import PostService
@@ -60,10 +57,10 @@ def create_post(post: PostCreate, service: PostService = Depends()):
     return service.create_post(post)
 ```
 
-## **2. Логика (сервисы) отдельно от маршрутов**  
-В папке `app/services/` создаем сервисы.
+2. Логика (сервисы) отдельно от маршрутов  
+В папке app/services/ создаем сервисы.
 
-### **user_service.py**  
+user_service.py 
 ```python
 from app.models.user import User
 from app.schemas.user_schema import UserCreate
@@ -73,8 +70,7 @@ class UserService:
         # Здесь может быть логика сохранения в БД
         return User(id=1, name=user.name, email=user.email)
 ```
-
-### **post_service.py**  
+post_service.py  
 ```python
 from app.models.post import Post
 from app.schemas.post_schema import PostCreate
@@ -84,8 +80,8 @@ class PostService:
         return Post(id=1, title=post.title, content=post.content)
 ```
 
-## **3. Подключаем маршруты в `main.py`**  
-В `app/main.py` регистрируем маршруты:  
+3. Подключаем маршруты в main.py 
+В app/main.py регистрируем маршруты:  
 ```python
 from fastapi import FastAPI
 from app.api.v1 import users, posts
@@ -97,10 +93,10 @@ app.include_router(users.router)
 app.include_router(posts.router)
 ```
 
-## **4. Определяем модели и схемы**  
-В `app/schemas/` создаем схемы для Pydantic.
+4. Определяем модели и схемы  
+В app/schemas/ создаем схемы для Pydantic.
 
-### **user_schema.py**  
+user_schema.py  
 ```python
 from pydantic import BaseModel, EmailStr
 
@@ -111,8 +107,7 @@ class UserCreate(BaseModel):
 class UserResponse(UserCreate):
     id: int
 ```
-
-### **post_schema.py**  
+post_schema.py 
 ```python
 from pydantic import BaseModel
 
@@ -123,11 +118,3 @@ class PostCreate(BaseModel):
 class PostResponse(PostCreate):
     id: int
 ```
-
-## **Вывод**  
-Теперь у нас:  
-✅ Раздельные файлы для маршрутов  
-✅ Отделенная бизнес-логика в сервисах  
-✅ Чистая структура проекта  
-
-Такой подход делает код читаемым и удобным для масштабирования 🚀

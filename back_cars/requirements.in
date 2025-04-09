@@ -8,3 +8,5 @@ python-multipart
 passlib
 pyjwt
 bcrypt
+pymongo
+cloudinary

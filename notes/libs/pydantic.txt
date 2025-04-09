@@ -1,0 +1,71 @@
+Pydantic — это библиотека для Python, которая позволяет автоматически проверять и валидировать данные, превращая их в удобные объекты.  
+Ключевая идея — ты описываешь структуру данных с типами (например, str, int, bool), а Pydantic проверяет, правильные ли данные пришли.
+
+Простой пример
+Допустим, в FastAPI приходит JSON с данными пользователя:
+```json
+{
+    "id": 123,
+    "name": "Alex",
+    "age": "25"
+}
+```
+Но age почему-то строка!  
+Без проверки код может сломаться.  
+Как решает это Pydantic? 
+Ты создаёшь модель с нужными типами:  
+```python
+from pydantic import BaseModel
+
+class User(BaseModel):
+    id: int
+    name: str
+    age: int  # Ожидаем число
+```
+Теперь, если в age передали строку, Pydantic попробует преобразовать её в число!  
+Если нельзя — выдаст ошибку.
+
+Пример работы 
+```python
+user = User(id=123, name="Alex", age="25")  
+print(user)  
+```
+Вывод:  
+```python
+id=123 name='Alex' age=25
+```
+Pydantic автоматически привёл "25" к числу! 
+Но если передать что-то невалидное, например "abc" в age, Pydantic сразу выкинет ошибку.
+
+Дополнительные возможности 
+Валидация email'ов, URL и других данных
+```python
+from pydantic import BaseModel, EmailStr, HttpUrl
+
+class User(BaseModel):
+    email: EmailStr
+    website: HttpUrl
+```
+Умные значения по умолчанию
+```python
+from pydantic import BaseModel
+
+class Product(BaseModel):
+    name: str
+    price: float = 0.0  # По умолчанию 0.0
+```
+Кастомные проверки
+Можно добавить свои правила:
+```python
+from pydantic import BaseModel, validator
+
+class Person(BaseModel):
+    name: str
+    age: int
+
+    @validator("age")
+    def check_age(cls, value):
+        if value < 18:
+            raise ValueError("Возраст должен быть 18+")
+        return value
+```

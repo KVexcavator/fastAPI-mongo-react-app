@@ -1,0 +1,127 @@
+typing в Python  
+typing — это модуль в Python, который помогает указывать типы данных в коде.  
+Это полезно для понимания кода и автоматической проверки (но не влияет на выполнение программы).  
+
+Примеры использования typing  
+
+Простейший пример  
+```python
+def greet(name: str) -> str:
+    return f"Привет, {name}!"
+```
+Здесь name: str означает, что функция ждёт строку, -> str показывает, что вернёт строку.  
+
+Типизация списков, словарей, кортежей 
+```python
+from typing import List, Dict, Tuple
+
+def process_data(users: List[str], scores: Dict[str, int]) -> Tuple[str, int]:
+    best_user = max(scores, key=scores.get)
+    return best_user, scores[best_user]
+```
+Здесь:  
+- List[str] — список строк (["Alice", "Bob"]).  
+- Dict[str, int] — словарь, ({"Alice": 90, "Bob": 80}).  
+- Tuple[str, int] — кортеж (("Alice", 90)).  
+
+Использование Any (когда тип неизвестен)  
+```python
+from typing import Any
+
+def process(data: Any) -> None:
+    print(f"Обрабатываю данные: {data}")
+```
+Optional (значение может быть None)  
+```python
+from typing import Optional
+
+def find_user(user_id: int) -> Optional[str]:
+    if user_id == 1:
+        return "Alice"
+    return None  # Может вернуть строку или None
+```
+Optional[str] означает, что функция вернёт либо строку, либо None.
+
+---
+
+Type Alias (создание своего типа) 
+```python
+from typing import Dict
+
+UserScores = Dict[str, int]  # Новый тип
+
+def get_top_user(scores: UserScores) -> str:
+    return max(scores, key=scores.get)
+```
+Теперь UserScores можно использовать как тип, вместо Dict[str, int].
+
+---
+
+TypedDict (типизация словарей с полями)  
+```python
+from typing import TypedDict
+
+class User(TypedDict):
+    name: str
+    age: int
+
+def show_user(user: User) -> None:
+    print(f"{user['name']} — {user['age']} лет")
+```
+Теперь User — это словарь с полями name: str и age: int.
+
+---
+
+Классы и typing  
+```python
+from typing import List
+
+class User:
+    def __init__(self, name: str, friends: List[str]) -> None:
+        self.name = name
+        self.friends = friends
+
+    def add_friend(self, friend: str) -> None:
+        self.friends.append(friend)
+```
+
+Callable (типизация функций)  
+```python
+from typing import Callable
+
+def execute(func: Callable[[int, int], int], a: int, b: int) -> int:
+    return func(a, b)
+
+def add(x: int, y: int) -> int:
+    return x + y
+
+print(execute(add, 2, 3))  # Выведет 5
+```
+Callable[[int, int], int] — означает функцию, которая принимает два int и возвращает int.
+
+Annotated из модуля typing позволяет добавлять метаданные к типам переменных.
+
+Общий синтаксис:
+```python
+from typing import Annotated
+
+MyType = Annotated[BaseType, Метаданные]
+```
+BaseType — обычный тип (str, int, list[str] и т. д.).
+Метаданные — дополнительные правила или валидаторы.
+
+🚀 Когда использовать Annotated?
+Типизация с доп. проверками
+```python
+Age = Annotated[int, Field(ge=18)]  # Возраст не меньше 18
+```
+Автоматическое приведение типов
+```python
+Price = Annotated[float, BeforeValidator(float)]  # Преобразует к float
+```
+Фильтрация полей в FastAPI
+```python
+from fastapi import Query
+
+Name = Annotated[str, Query(min_length=3)]
+```

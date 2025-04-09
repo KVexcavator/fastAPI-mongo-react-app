@@ -1,0 +1,2 @@
+drop the existing cars collection
+http://0.0.0.0:8081/
