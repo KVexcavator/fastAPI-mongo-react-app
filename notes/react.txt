@@ -11,3 +11,21 @@ react router:
 https://reactrouter.com/start/data/installation
 npm i react-router
 ----------------------------------
+поймать из .env
+import.meta.env.VITE_API_URL
+----------------------------------
+Выполнение проверки данных с помощью React Hook Form and Zod
+https://www.npmjs.com/package/react-hook-form
+npm install react-hook-form
+https://zod.dev/?id=installation
+npm install zod
+https://www.npmjs.com/package/@hookform/resolvers
+npm install @hookform/resolvers
+
+Хук useForm предоставляет несколько полезных функций:
+- register используется для регистрации полей одной формы с помощью хука
+- handleSubmit — это функция, которая будет вызвана при отправке
+- formState содержит различную информацию о состоянии формы
+
+
+----------------------------------

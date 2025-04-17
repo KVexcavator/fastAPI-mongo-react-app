@@ -7,7 +7,7 @@ import {
   RouterProvider
 } from 'react-router'
 import RootLayout from './layouts/RootLayout'
-import Cars from './pages/Cars'
+import Cars, { carsLoader } from './pages/Cars'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import NewCar from './pages/NewCar'
@@ -18,7 +18,7 @@ const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path='/' element={<RootLayout />}>
       <Route index element={<Home />} />
-      <Route path='cars' element={<Cars />} />
+      <Route path='cars' element={<Cars />} loader={carsLoader}/>
       <Route path='login' element={<Login />} />
       <Route path='new-car' element={<NewCar />} />
       <Route path="cars/:id" element={<SingleCar />} />
