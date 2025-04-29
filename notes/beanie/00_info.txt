@@ -1,0 +1,7 @@
+1. Beanie — MongoDB Object-Document Mappers (ODM)
+- https://beanie-odm.dev/
+- Класс Document в Beanie представляет документы, которые в конечном итоге будут сохранены в базе данных MongoDB, и эти модели наследуют класс Document в Beanie, который сам по себе является классом на основе BaseModel в Pydantic.
+------------------------------
+2. Resend API — сервис для автоматической отправки писем.
+3. Llama cм ./tools/LLama.txt
+4. Учетная запись Netlify (бесплатный уровень)

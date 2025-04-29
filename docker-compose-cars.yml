@@ -2,7 +2,7 @@ version: '3.1'
 services:
   mongo:
     image: mongo:7.0
-    container_name: mongo_beanie
+    container_name: mongo_cars
     restart: always
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
@@ -28,12 +28,12 @@ services:
 
   fastapi:
     build:
-      context: ./back_beanie
+      context: ./back_cars
       dockerfile: Dockerfile
-    container_name: app_beanie
+    container_name: app_cars
     restart: always
     env_file:
-      - ./back_beanie/.env
+      - ./back_cars/.env
     ports:
       - 8000:8000
     networks:
