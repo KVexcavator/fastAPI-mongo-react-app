@@ -1,7 +1,10 @@
+import CarForm  from "../components/CarForm"
 
 const NewCar = () => {
   return (
-    <div>NewCar</div>
+    <div>
+      <CarForm />
+    </div>
   )
 }
 

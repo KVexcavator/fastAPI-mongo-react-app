@@ -1,15 +1,30 @@
 import { NavLink, Outlet } from "react-router"
+import { useAuth } from "../hooks/useAuth"
+
 const RootLayout = () => {
+  const { user, message, logout } = useAuth()
+
   return(
     <div className="bg-blue-200 min-h-screen p-2">
       <h1>RootLayout</h1>
-      <header className="p-8 w-full">
-        <nav className="flex flex-row">
+      <p className="text-red-500 p-2 border">
+        {message}
+      </p>
+      <p>Username: {user}</p>
+      <header className="p-3 w-full">
+        <nav className="flex flex-row justify-between mx-auto">
           <div className="flex flex-row space-x-3">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/cars">Cars</NavLink>
-            <NavLink to="/login">Login</NavLink>
-            <NavLink to="/new-car">New Cars</NavLink>
+            {user ?
+              <>
+                <NavLink to="/new-car">New Cars</NavLink>
+                <button onClick={logout}>Logout</button>
+              </> :
+              <>
+                <NavLink to="/login">Login</NavLink>
+              </>
+            }           
           </div>
         </nav>
       </header>
